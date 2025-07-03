@@ -1,0 +1,12 @@
+# .gitignore (ルートディレクトリ)
+
+# どの環境でも共通の無視ファイル
+.DS_Store
+node_modules/
+
+# 各パッケージで生成されるファイル
+packages/**/node_modules
+packages/**/dist
+
+# 環境変数ファイル
+.env
