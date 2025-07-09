@@ -17,11 +17,14 @@
    ```bash
    cd mosquito-app
    ```
-3. 依存関係をインストールします。
+3. 依存関係をインストールします。(frontとserverの両方)
+    ```bash
+    npm install
+    ```
 4. pnpm install
    ```bash
    pnpm install
-   
+
 5. Dockerを使用してアプリケーションを起動します。
    ```bash
    docker-compose up --build
@@ -29,7 +32,7 @@
 6. ブラウザで `http://localhost:3000` にアクセスします。
 7. サーバーは `http://localhost:3001` で動作しています。
 8. フロントエンドは `http://localhost:3000` で動作しています。
-9. Prismaのマイグレーションを実行します。
+9.  Prismaのマイグレーションを実行します。
    ```bash
    docker-compose exec server npx prisma migrate dev --name init
    ```
