@@ -10,3 +10,5 @@ packages/**/dist
 
 # 環境変数ファイル
 .env
+
+*package-lock.json
