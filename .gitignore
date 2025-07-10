@@ -15,3 +15,6 @@ packages/**/dist
 
 # migrationファイル
 packages/server/prisma/migrations/
+
+#pnpm-lock.yaml
+*pnpm-lock.yaml
