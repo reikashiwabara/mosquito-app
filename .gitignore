@@ -12,3 +12,6 @@ packages/**/dist
 .env
 
 *package-lock.json
+
+# migrationファイル
+packages/server/prisma/migrations/
