@@ -1,9 +1,10 @@
 import express from 'express';
 import authRoutes from './auth';
+import rankingRoutes from './ranking';
 
 const router = express.Router();
 
-// 認証関連のルート
 router.use('/auth', authRoutes);
+router.use(rankingRoutes);
 
 export default router;
