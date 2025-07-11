@@ -1,27 +1,11 @@
-import React, { useEffect, useState } from 'react';
-
-type UserRanking = {
-  id: number;
-  name: string;
-  kills: number;
-  deaths: number;
-  killRate: number;
-};
+import React from 'react';
+import { useRanking } from '../hooks';
 
 export const RankingPage: React.FC = () => {
-  const [ranking, setRanking] = useState<UserRanking[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/ranking')
-      .then(res => res.json())
-      .then(data => {
-        setRanking(data);
-        setLoading(false);
-      });
-  }, []);
+  const { ranking, loading, error } = useRanking();
 
   if (loading) return <div>読み込み中...</div>;
+  if (error) return <div>エラー: {error}</div>;
 
   return (
     <div>

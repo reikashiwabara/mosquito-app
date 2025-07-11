@@ -12,6 +12,15 @@ export interface User {
   deaths: number;
 }
 
+// ランキング用ユーザー情報
+export interface UserRanking {
+  id: number;
+  name: string;
+  kills: number;
+  deaths: number;
+  killRate: number;
+}
+
 // ログエントリ
 export interface LogEntry {
   id: number;

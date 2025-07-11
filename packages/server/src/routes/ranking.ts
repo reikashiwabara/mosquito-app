@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import { prisma } from '../prismaClient';
+import { PrismaClient } from '../../generated/prisma';
 
 const router = Router();
+const prisma = new PrismaClient();
 
 router.get('/ranking', async (req, res) => {
   try {
