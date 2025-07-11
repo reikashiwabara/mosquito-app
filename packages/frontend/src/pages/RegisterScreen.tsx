@@ -10,7 +10,6 @@ interface RegisterScreenProps {
 
 export const RegisterScreen: FC<RegisterScreenProps> = ({ 
   onRegister, 
-  onSwitchToLogin, 
   isLoading, 
   error 
 }) => {
