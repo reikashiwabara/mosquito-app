@@ -4,7 +4,6 @@ import type { FC } from 'react';
 
 interface LoginScreenProps {
   onLogin: (email: string, password: string) => void;
-  onSwitchToRegister: () => void; // 使用しないが互換性のため残す
   isLoading: boolean;
   error: string | null;
 }
