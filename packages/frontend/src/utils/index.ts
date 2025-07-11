@@ -1,7 +1,9 @@
 // API設定とユーティリティ関数
 
-// API ベースURL - Docker環境を考慮
-export const API_BASE_URL = 'http://localhost:3001/api';
+// API ベースURL - 環境に応じて動的に設定
+export const API_BASE_URL = import.meta.env.PROD 
+  ? import.meta.env.VITE_API_BASE_URL || 'https://your-api-domain.com/api'
+  : 'http://localhost:3001/api';
 
 // ローカルストレージ関連のユーティリティ
 export const tokenStorage = {

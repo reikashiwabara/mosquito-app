@@ -1,14 +1,24 @@
 {
   "name": "mosquito-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mosquito killing game app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite"
+    "dev": "vite",
+    "build": "pnpm run build:frontend && pnpm run build:server",
+    "build:frontend": "cd packages/frontend && pnpm run build",
+    "build:server": "cd packages/server && pnpm run build",
+    "start": "cd packages/server && pnpm run start",
+    "dev:frontend": "cd packages/frontend && pnpm run dev",
+    "dev:server": "cd packages/server && pnpm run dev"
   },
-  "keywords": [],
+  "keywords": ["game", "react", "node", "typescript"],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.12.4"
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
 }
