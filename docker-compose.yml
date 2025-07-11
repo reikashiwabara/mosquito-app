@@ -27,8 +27,9 @@ services:
       - ./packages/server/src:/app/src
     depends_on:
       - db
-    environment:
-      DATABASE_URL: "postgresql://user:password@db:5432/mosquito_app_db"
+    # environmentの代わりにenv_fileを使用
+    env_file:
+      - ./packages/server/.env 
 
   frontend:
     build:
