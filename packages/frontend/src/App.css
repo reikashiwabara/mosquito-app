@@ -48,12 +48,13 @@ button {
   cursor: pointer;
   transition: all 0.25s;
 }
+
 button:hover {
   background-color: #585b70;
   border-color: #89b4fa;
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"] {
   width: 80%;
   max-width: 300px;
   padding: 0.8em 1.2em;
@@ -66,7 +67,7 @@ input[type="text"] {
   transition: border-color 0.25s;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
   outline: none;
   border-color: #89b4fa;
 }
@@ -93,10 +94,30 @@ input[type="text"]:focus {
   gap: 1.5rem;
 }
 
+.main-header {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
 .main-header h2 {
   font-size: 1.5em;
   color: #a6e3a1;
   margin: 0 0 1rem 0;
+}
+
+.logout-button {
+  background-color: #f38ba8;
+  color: #11111b;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.logout-button:hover {
+  background-color: #eba0ac;
 }
 
 /* スコアボード */
@@ -115,6 +136,7 @@ input[type="text"]:focus {
   font-weight: bold;
   color: #cdd6f4;
 }
+
 .kd-ratio span {
   font-size: 2.5em;
   font-weight: 700;
@@ -323,24 +345,4 @@ a:hover {
 
 .mypage-button:hover {
   background-color: #91c7ff;
-}
-
-.logout-button {
-  background-color: #f38ba8;
-  color: #11111b;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
-.logout-button:hover {
-  background-color: #eba0ac;
-}
-
-.main-header {
-  position: relative;
-  margin-bottom: 2rem;
 }
