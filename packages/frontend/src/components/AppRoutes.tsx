@@ -31,7 +31,6 @@ export const AppRoutes = () => {
           ) : (
             <LoginScreen 
               onLogin={handleLogin}
-              onSwitchToRegister={() => {}} // React Router では Link を使用
               isLoading={isLoading}
               error={error}
             />
@@ -48,7 +47,6 @@ export const AppRoutes = () => {
           ) : (
             <RegisterScreen
               onRegister={handleRegister}
-              onSwitchToLogin={() => {}} // React Router では Link を使用
               isLoading={isLoading}
               error={error}
             />
