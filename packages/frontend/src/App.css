@@ -48,12 +48,13 @@ button {
   cursor: pointer;
   transition: all 0.25s;
 }
+
 button:hover {
   background-color: #585b70;
   border-color: #89b4fa;
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"] {
   width: 80%;
   max-width: 300px;
   padding: 0.8em 1.2em;
@@ -66,7 +67,7 @@ input[type="text"] {
   transition: border-color 0.25s;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
   outline: none;
   border-color: #89b4fa;
 }
@@ -93,10 +94,30 @@ input[type="text"]:focus {
   gap: 1.5rem;
 }
 
+.main-header {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
 .main-header h2 {
   font-size: 1.5em;
   color: #a6e3a1;
   margin: 0 0 1rem 0;
+}
+
+.logout-button {
+  background-color: #f38ba8;
+  color: #11111b;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.logout-button:hover {
+  background-color: #eba0ac;
 }
 
 /* スコアボード */
@@ -115,6 +136,7 @@ input[type="text"]:focus {
   font-weight: bold;
   color: #cdd6f4;
 }
+
 .kd-ratio span {
   font-size: 2.5em;
   font-weight: 700;
@@ -192,4 +214,135 @@ input[type="text"]:focus {
 
 .log-entry:last-child {
   border-bottom: none;
+}
+
+/* 認証フォーム */
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #cdd6f4;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #313244;
+  border-radius: 8px;
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #89b4fa;
+}
+
+.form-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: #f38ba8;
+  color: #11111b;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+/* React Router Link のスタイリング */
+a {
+  color: #74c0fc;
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+a:hover {
+  color: #91c7ff;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #74c0fc;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+  padding: 0;
+  transition: color 0.25s;
+}
+
+.link-button:hover {
+  color: #91c7ff;
+}
+
+/* マイページ関連のスタイル */
+.user-info {
+  background-color: #313244;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.stats {
+  display: grid;
+  gap: 0.5rem;
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #45475a;
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-weight: 500;
+  color: #bac2de;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #cdd6f4;
+}
+
+.back-button {
+  background-color: #6c7086;
+  color: #cdd6f4;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.25s;
+}
+
+.back-button:hover {
+  background-color: #7f849c;
+  color: #cdd6f4;
+}
+
+.mypage-button {
+  background-color: #74c0fc;
+  color: #11111b;
+  margin-top: 1rem;
+}
+
+.mypage-button:hover {
+  background-color: #91c7ff;
 }

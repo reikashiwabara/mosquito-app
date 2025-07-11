@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
@@ -17,7 +18,10 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
+  name      String   // ユーザー名
   password  String   // パスワードのハッシュを保存
+  kills     Int      @default(0) // キル数
+  deaths    Int      @default(0) // デス数
   posts     Post[]
   createdAt DateTime @default(now())
 }
