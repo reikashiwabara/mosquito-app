@@ -27,11 +27,9 @@ backend:
         - pnpm i --frozen-lockfile
     build:
       commands:
-        - pnpm --filter server build
-        # データベースのマイグレーションを実行
-        - pnpm --filter server exec prisma migrate deploy
-        # Prisma Clientを生成
-        - pnpm --filter server exec prisma generate
+        - 'pnpm --filter server exec prisma generate'
+        - 'pnpm --filter server exec prisma migrate deploy'
+        - 'pnpm --filter server build'
   artifacts:
     baseDirectory: packages/server
     files:
