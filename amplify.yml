@@ -3,38 +3,44 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install -g pnpm
-        - pnpm install
-        - cd packages/server && pnpm prisma generate
+        - npm i -g pnpm
+        - pnpm config set store-dir .pnpm-store
+        - pnpm i --frozen-lockfile
     build:
       commands:
-        - cd packages/frontend && pnpm run build
+        - pnpm --filter frontend build
   artifacts:
     baseDirectory: packages/frontend/dist
     files:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
-      - packages/frontend/node_modules/**/*
-      - packages/server/node_modules/**/*
+      - .pnpm-store
+      - node_modules
+      - packages/frontend/node_modules
 backend:
   phases:
     preBuild:
       commands:
-        - npm install -g pnpm
-        - pnpm install
-        - cd packages/server && pnpm prisma generate
+        - npm i -g pnpm
+        - pnpm config set store-dir .pnpm-store
+        - pnpm i --frozen-lockfile
     build:
       commands:
-        - cd packages/server && pnpm run build
-    postBuild:
-      commands:
-        - cd packages/server && pnpm prisma migrate deploy
+        - pnpm --filter server build
+        # データベースのマイグレーションを実行
+        - pnpm --filter server exec prisma migrate deploy
+        # Prisma Clientを生成
+        - pnpm --filter server exec prisma generate
   artifacts:
     baseDirectory: packages/server
     files:
-      - dist/**/*
-      - package.json
-      - node_modules/**/*
-      - generated/**/*
+      - 'dist/**/*'
+      - 'node_modules/**/*'
+      - 'prisma/**/*'
+      - 'package.json'
+  cache:
+    paths:
+      - .pnpm-store
+      - node_modules
+      - packages/server/node_modules
