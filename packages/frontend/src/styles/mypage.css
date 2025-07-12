@@ -1,17 +1,87 @@
 /* マイページ関連のスタイル */
 
-.user-info {
+.mypage-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.mypage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.mypage-header h2 {
+  color: #cdd6f4;
+  margin: 0;
+  font-size: 2rem;
+}
+
+.mypage-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* プロフィールセクション */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #45475a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #bac2de;
+  margin: 0 auto;
+  border: 3px solid #585b70;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name-card {
+  background-color: #313244;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #45475a;
+}
+
+.user-name-card h3 {
+  margin: 0;
+  color: #cdd6f4;
+  font-size: 1.2rem;
+}
+
+.user-details-card {
   background-color: #313244;
   border-radius: 8px;
   padding: 1.5rem;
-  margin: 1rem 0;
+  border: 1px solid #45475a;
 }
 
-.stats {
-  display: grid;
-  gap: 0.5rem;
-  text-align: left;
-  margin-top: 1rem;
+.user-details-card .stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .stat-item {
@@ -28,13 +98,102 @@
 .stat-label {
   font-weight: 500;
   color: #bac2de;
+  font-size: 0.9rem;
 }
 
 .stat-value {
   font-weight: 600;
   color: #cdd6f4;
+  font-size: 0.9rem;
 }
 
+/* グラフセクション */
+.charts-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bedlock-generator {
+  background-color: #313244;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #45475a;
+  text-align: center;
+}
+
+.bedlock-generator h3 {
+  margin: 0 0 1rem 0;
+  color: #cdd6f4;
+  font-size: 1.1rem;
+}
+
+.bedlock-button {
+  background-color: #74c0fc;
+  color: #11111b;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.bedlock-button:hover {
+  background-color: #91c7ff;
+}
+
+.charts-container {
+  background-color: #313244;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #45475a;
+}
+
+.charts-header {
+  margin-bottom: 1rem;
+}
+
+.charts-header h3 {
+  margin: 0;
+  color: #74c0fc;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #74c0fc;
+  padding-bottom: 0.5rem;
+}
+
+.chart-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.chart-list li {
+  color: #bac2de;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.chart-list li::before {
+  content: "• ";
+  color: #74c0fc;
+  margin-right: 0.5rem;
+}
+
+.chart-placeholder {
+  height: 200px;
+  background-color: #1e1e2e;
+  border: 2px dashed #45475a;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c7086;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* ボタンスタイル */
 .back-button {
   background-color: #6c7086;
   color: #cdd6f4;
@@ -44,9 +203,43 @@
   text-decoration: none;
   font-size: 0.9rem;
   transition: background-color 0.25s;
+  display: inline-block;
 }
 
 .back-button:hover {
   background-color: #7f849c;
   color: #cdd6f4;
+  text-decoration: none;
+}
+
+.logout-button {
+  background-color: #f38ba8;
+  color: #11111b;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.logout-button:hover {
+  background-color: #eba0ac;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .mypage-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .mypage-container {
+    padding: 1rem;
+  }
 }
