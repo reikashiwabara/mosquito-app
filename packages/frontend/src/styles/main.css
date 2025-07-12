@@ -1,0 +1,43 @@
+/* メイン画面のスタイル */
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.main-header {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.main-header h2 {
+  font-size: 1.5em;
+  color: #a6e3a1;
+  margin: 0 0 1rem 0;
+}
+
+.logout-button {
+  background-color: #f38ba8;
+  color: #11111b;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.logout-button:hover {
+  background-color: #eba0ac;
+}
+
+.mypage-button {
+  background-color: #74c0fc;
+  color: #11111b;
+  margin-top: 1rem;
+}
+
+.mypage-button:hover {
+  background-color: #91c7ff;
+}

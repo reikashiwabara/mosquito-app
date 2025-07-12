@@ -1,0 +1,50 @@
+/* 認証関連のスタイル（ログイン・レジスター画面） */
+
+/* ログイン画面のスタイル */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.login-container p {
+  font-size: 1.2em;
+  color: #bac2de;
+  margin: 0;
+}
+
+/* 認証フォーム */
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #cdd6f4;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #313244;
+  border-radius: 8px;
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #89b4fa;
+}
+
+.form-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

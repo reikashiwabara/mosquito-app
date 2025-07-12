@@ -1,0 +1,63 @@
+/* グローバル & 基本スタイル */
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #1a1d21;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: block;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: #cdd6f4;
+}
+
+/* React Router Link のスタイリング */
+a {
+  color: #74c0fc;
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+a:hover {
+  color: #91c7ff;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #74c0fc;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+  padding: 0;
+  transition: color 0.25s;
+}
+
+.link-button:hover {
+  color: #91c7ff;
+}

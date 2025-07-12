@@ -1,0 +1,6 @@
+/* スタイルインデックス - すべてのスタイルをまとめてインポート */
+@import './global.css';
+@import './components.css';
+@import './auth.css';
+@import './main.css';
+@import './mypage.css';
