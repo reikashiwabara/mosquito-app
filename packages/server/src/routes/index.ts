@@ -2,11 +2,12 @@ import express from 'express';
 import authRoutes from './auth';
 import statsRoutes from './stats';
 import gamelogRoutes from './gamelog';
+import rankingRoutes from './ranking';
 
 const router = express.Router();
 
-// 認証関連のルート
 router.use('/auth', authRoutes);
+router.use(rankingRoutes);
 
 // 統計関連のルート
 router.use('/stats', statsRoutes);

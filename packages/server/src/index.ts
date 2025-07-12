@@ -25,7 +25,6 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 
-// ミドルウェア
 app.use(express.json());
 app.use(cors(corsOptions));
 
@@ -38,11 +37,6 @@ app.get('/health', (req: any, res: any) => {
     });
 });
 
-app.get('/test', (req: any, res: { send: (arg0: string) => void; }) => {
-    res.send("hello world");
-});
-
-//routesディレクトリにある全てのルートを読み込む
 app.use('/api', routes);
 
 app.listen(port, () => {
