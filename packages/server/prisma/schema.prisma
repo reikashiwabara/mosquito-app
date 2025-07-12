@@ -16,14 +16,17 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String   // ユーザー名
-  password  String   // パスワードのハッシュを保存
-  kills     Int      @default(0) // キル数
-  deaths    Int      @default(0) // デス数
-  posts     Post[]
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  name        String   // ユーザー名
+  password    String   // パスワードのハッシュを保存
+  kills       Int      @default(0) // キル数
+  deaths      Int      @default(0) // デス数
+  profileImage String? // プロフィール画像のURL（オプショナル）
+  title       String?  // 称号（オプショナル）
+  posts       Post[]
+  gameLogs    GameLog[] // ゲームログとの関連
+  createdAt   DateTime @default(now())
 }
 
 model Post {
@@ -34,4 +37,14 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
   createdAt DateTime @default(now())
+}
+
+model GameLog {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  action    String   // "kill" または "death"
+  createdAt DateTime @default(now())
+  
+  @@index([userId, createdAt]) // クエリ最適化のためのインデックス
 }

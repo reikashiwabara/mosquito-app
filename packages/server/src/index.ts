@@ -7,10 +7,22 @@ const port = process.env.PORT || 3001; // Amplifyではprocess.env.PORTを使用
 
 // CORS設定を本番環境に対応
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL || 'https://your-frontend-domain.amplifyapp.com']
-    : ['http://localhost:5173', 'http://localhost:3000'],
-  credentials: true
+  origin: function (origin: any, callback: any) {
+    // 開発環境では全てのオリジンを許可
+    if (process.env.NODE_ENV !== 'production') {
+      return callback(null, true);
+    }
+    
+    // 本番環境では特定のオリジンのみ許可
+    const allowedOrigins = [process.env.FRONTEND_URL || 'https://your-frontend-domain.amplifyapp.com'];
+    if (allowedOrigins.includes(origin) || !origin) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 // ミドルウェア

@@ -10,6 +10,8 @@ export interface User {
   name: string;
   kills: number;
   deaths: number;
+  profileImage?: string; // プロフィール画像のURL（オプショナル）
+  title?: string;        // 称号（オプショナル）
 }
 
 // ログエントリ

@@ -4,7 +4,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { useAuthContext } from './AuthProvider';
 
 export const AppRoutes = () => {
-  const { user, isLoading, error, login, register, logout, handleKill, handleDeath, logs } = useAuthContext();
+  const { user, isLoading, error, login, register, logout, handleKill, handleDeath, logs, updateUserProfile } = useAuthContext();
 
   // ログイン処理
   const handleLogin = async (email: string, password: string) => {
@@ -80,6 +80,7 @@ export const AppRoutes = () => {
             <MyPage
               user={user!}
               onLogout={logout}
+              onUserUpdate={updateUserProfile}
             />
           </ProtectedRoute>
         } 
