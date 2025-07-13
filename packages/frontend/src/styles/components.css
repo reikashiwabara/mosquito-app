@@ -105,6 +105,32 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
   letter-spacing: 1px;
 }
 
+.current-death-streak {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #45475a;
+  border-radius: 8px;
+  border: 1px solid #f38ba8;
+}
+
+.death-streak-count {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #f38ba8;
+  text-shadow: 0 0 8px rgba(243, 139, 168, 0.5);
+}
+
+.death-streak-label {
+  font-size: 0.8em;
+  color: #bac2de;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
 /* アクションボタン */
 .actions-container {
   display: flex;

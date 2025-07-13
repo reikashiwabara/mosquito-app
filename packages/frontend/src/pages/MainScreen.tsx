@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import type { LogEntry } from '../types';
-import { ScoreBoard, ActionButtons, LogArea, Layout, KillStreakEffect } from '../components';
+import { ScoreBoard, ActionButtons, LogArea, Layout, KillStreakEffect, DeathStreakEffect } from '../components';
 import { useKillStreak } from '../hooks';
 
 interface MainScreenProps {
@@ -25,9 +25,12 @@ export const MainScreen: FC<MainScreenProps> = ({
   const {
     streakCount,
     showEffect,
+    deathStreakCount,
+    showDeathEffect,
     registerKill,
     registerDeath,
-    hideEffect
+    hideEffect,
+    hideDeathEffect
   } = useKillStreak();
 
   // キルアクションをキルストリークと連携
@@ -36,7 +39,7 @@ export const MainScreen: FC<MainScreenProps> = ({
     registerKill();
   };
 
-  // デスアクションをキルストリークと連携
+  // デスアクションをデスストリークと連携
   const handleDeath = () => {
     onDeath();
     registerDeath();
@@ -49,7 +52,12 @@ export const MainScreen: FC<MainScreenProps> = ({
           <h2>{userName}'s Battle</h2>
         </header>
 
-        <ScoreBoard kills={kills} deaths={deaths} currentStreak={streakCount} />
+        <ScoreBoard 
+          kills={kills} 
+          deaths={deaths} 
+          currentStreak={streakCount}
+          currentDeathStreak={deathStreakCount}
+        />
         <ActionButtons onKill={handleKill} onDeath={handleDeath} />
         <LogArea logs={logs} />
         
@@ -58,6 +66,13 @@ export const MainScreen: FC<MainScreenProps> = ({
           streakCount={streakCount}
           isVisible={showEffect}
           onAnimationEnd={hideEffect}
+        />
+        
+        {/* デスストリークエフェクト */}
+        <DeathStreakEffect
+          streakCount={deathStreakCount}
+          isVisible={showDeathEffect}
+          onAnimationEnd={hideDeathEffect}
         />
       </div>
     </Layout>

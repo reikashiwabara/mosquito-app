@@ -8,3 +8,4 @@ export { StatsChart } from './StatsChart';
 export { Sidebar } from './Sidebar';
 export { Layout } from './Layout';
 export { KillStreakEffect } from './KillStreakEffect';
+export { DeathStreakEffect } from './DeathStreakEffect';
