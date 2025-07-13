@@ -7,3 +7,4 @@ export { AppRoutes } from './AppRoutes';
 export { StatsChart } from './StatsChart';
 export { Sidebar } from './Sidebar';
 export { Layout } from './Layout';
+export { KillStreakEffect } from './KillStreakEffect';

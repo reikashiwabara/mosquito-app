@@ -4,9 +4,10 @@ import { calculateKDRatio } from '../utils';
 interface ScoreBoardProps {
   kills: number;
   deaths: number;
+  currentStreak?: number;
 }
 
-export const ScoreBoard: FC<ScoreBoardProps> = ({ kills, deaths }) => {
+export const ScoreBoard: FC<ScoreBoardProps> = ({ kills, deaths, currentStreak = 0 }) => {
   const kdRatio = calculateKDRatio(kills, deaths);
 
   return (
@@ -18,6 +19,12 @@ export const ScoreBoard: FC<ScoreBoardProps> = ({ kills, deaths }) => {
         <span>{kills} Kill</span>
         <span>{deaths} Death</span>
       </div>
+      {currentStreak > 0 && (
+        <div className="current-streak">
+          <span className="streak-count">{currentStreak}</span>
+          <span className="streak-label">キルストリーク</span>
+        </div>
+      )}
     </div>
   );
 };
