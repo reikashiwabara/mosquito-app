@@ -6,29 +6,34 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 // JWTトークンを検証するミドルウェア
-const authenticateToken = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+const authenticateToken = (req: express.Request, res: express.Response, next: express.NextFunction): void => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
-    return res.sendStatus(401);
+    res.sendStatus(401);
+    return;
   }
 
   jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret', (err: any, user: any) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      res.sendStatus(403);
+      return;
+    }
     (req as any).user = user;
     next();
   });
 };
 
 // 統計データ取得エンドポイント
-router.get('/:period', authenticateToken, async (req, res) => {
+router.get('/:period', authenticateToken, async (req: express.Request, res: express.Response): Promise<void> => {
   try {
     const { period } = req.params;
     const { userId } = req.query;
 
     if (!userId) {
-      return res.status(400).json({ error: 'ユーザーIDが必要です' });
+      res.status(400).json({ error: 'ユーザーIDが必要です' });
+      return;
     }
 
     // 実際のゲームログデータを取得

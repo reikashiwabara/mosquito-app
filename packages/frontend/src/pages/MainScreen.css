@@ -1,0 +1,49 @@
+/* MainScreenのレイアウトスタイル */
+.main-content-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.game-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 1024px) {
+  .main-content-layout {
+    gap: 20px;
+  }
+  
+  .game-area {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content-layout {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+  
+  .game-area {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content-layout {
+    padding: 0 8px;
+    gap: 12px;
+  }
+  
+  .game-area {
+    gap: 10px;
+  }
+}

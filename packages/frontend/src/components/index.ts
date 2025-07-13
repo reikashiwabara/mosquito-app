@@ -9,3 +9,6 @@ export { Sidebar } from './Sidebar';
 export { Layout } from './Layout';
 export { KillStreakEffect } from './KillStreakEffect';
 export { DeathStreakEffect } from './DeathStreakEffect';
+export { WeaponSelector } from './WeaponSelector';
+export { WeaponSelectorSidebar } from './WeaponSelectorSidebar';
+export { StaticWeaponSelector } from './StaticWeaponSelector';

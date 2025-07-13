@@ -1,14 +1,20 @@
-import React from 'react';
+import type { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuthContext } from './AuthProvider';
 import '../styles/sidebar.css';
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: FC = () => {
   const location = useLocation();
-  const { logout } = useAuth();
+  const { logout } = useAuthContext();
 
   const handleLogout = () => {
-    logout();
+    console.log('ログアウトボタンが押されました');
+    try {
+      logout();
+      console.log('ログアウト処理完了');
+    } catch (error) {
+      console.error('ログアウトエラー:', error);
+    }
   };
 
   const isActive = (path: string) => {

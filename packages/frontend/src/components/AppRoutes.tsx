@@ -6,6 +6,9 @@ import { useAuthContext } from './AuthProvider';
 export const AppRoutes = () => {
   const { user, isLoading, error, login, register, logout, handleKill, handleDeath, logs, updateUserProfile } = useAuthContext();
 
+  console.log('AppRoutes: 現在のユーザー状態:', user);
+  console.log('AppRoutes: 現在のパス:', window.location.pathname);
+
   // ログイン処理
   const handleLogin = async (email: string, password: string) => {
     const success = await login(email, password);
@@ -22,6 +25,12 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
+      {/* ルートパス */}
+      <Route 
+        path="/" 
+        element={<Navigate to={user ? "/main" : "/login"} replace />} 
+      />
+
       {/* ログイン画面 */}
       <Route 
         path="/login" 
@@ -60,13 +69,12 @@ export const AppRoutes = () => {
         element={
           <ProtectedRoute user={user}>
             <MainScreen
-              userName={user?.name || ''}
-              kills={user?.kills || 0}
-              deaths={user?.deaths || 0}
+              user={user!}
               logs={logs}
               onKill={handleKill}
               onDeath={handleDeath}
               onLogout={logout}
+              onUserUpdate={updateUserProfile}
             />
           </ProtectedRoute>
         } 
@@ -122,7 +130,13 @@ export const AppRoutes = () => {
       />
 
       {/* デフォルトルート */}
-      <Route path="*" element={<Navigate to={user ? "/main" : "/login"} replace />} />
+      <Route path="*" element={
+        (() => {
+          const destination = user ? "/main" : "/login";
+          console.log('AppRoutes: デフォルトルート - リダイレクト先:', destination);
+          return <Navigate to={destination} replace />;
+        })()
+      } />
     </Routes>
   );
 };

@@ -6,36 +6,42 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 // JWTトークンを検証するミドルウェア
-const authenticateToken = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+const authenticateToken = (req: express.Request, res: express.Response, next: express.NextFunction): void => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
-    return res.sendStatus(401);
+    res.sendStatus(401);
+    return;
   }
 
   jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret', (err: any, user: any) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      res.sendStatus(403);
+      return;
+    }
     (req as any).user = user;
     next();
   });
 };
 
 // ゲームログ記録エンドポイント
-router.post('/record', authenticateToken, async (req, res) => {
+router.post('/record', authenticateToken, async (req: express.Request, res: express.Response): Promise<void> => {
   try {
-    const { action } = req.body; // 'kill' または 'death'
+    const { action, weapon } = req.body; // 'kill' または 'death'、武器名
     const user = (req as any).user;
 
     if (!action || !['kill', 'death'].includes(action)) {
-      return res.status(400).json({ error: '無効なアクションです' });
+      res.status(400).json({ error: '無効なアクションです' });
+      return;
     }
 
-    // ゲームログをデータベースに保存
+    // ゲームログをデータベースに保存（武器名も含める）
     const gameLog = await prisma.gameLog.create({
       data: {
         userId: user.userId,
         action: action,
+        weapon: weapon || null, // 武器名を直接保存
         createdAt: new Date()
       }
     });
@@ -65,7 +71,7 @@ router.post('/record', authenticateToken, async (req, res) => {
 });
 
 // ゲームログ取得エンドポイント
-router.get('/logs', authenticateToken, async (req, res) => {
+router.get('/logs', authenticateToken, async (req: express.Request, res: express.Response): Promise<void> => {
   try {
     const user = (req as any).user;
     const { limit = 10 } = req.query;

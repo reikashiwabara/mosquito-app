@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 武器（ハンマー）アイコン -->
+  <rect width="64" height="64" fill="#1e1e2e"/>
+  <!-- ハンドル -->
+  <rect x="30" y="20" width="4" height="32" fill="#a6adc8" rx="2"/>
+  <!-- ハンマーヘッド -->
+  <rect x="20" y="16" width="24" height="12" fill="#f38ba8" rx="2"/>
+  <!-- ハンマーヘッド上部 -->
+  <rect x="22" y="14" width="20" height="4" fill="#eba0ac" rx="1"/>
+  <!-- 金属の質感 -->
+  <rect x="24" y="18" width="2" height="8" fill="#f9e2af" opacity="0.6"/>
+  <rect x="38" y="18" width="2" height="8" fill="#f9e2af" opacity="0.6"/>
+  <!-- グリップ -->
+  <circle cx="32" cy="48" r="3" fill="#585b70"/>
+  <circle cx="32" cy="42" r="2" fill="#585b70"/>
+</svg>

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useState, useRef } from 'react';
 import type { User } from '../types';
 import { calculateKDRatio, API_BASE_URL } from '../utils';
-import { StatsChart, Layout } from '../components';
+import { StatsChart, Layout, WeaponSelector } from '../components';
 
 interface MyPageProps {
   user: User;
@@ -186,7 +186,6 @@ export const MyPage: FC<MyPageProps> = ({ user, onUserUpdate }) => {
             </div>
           </div>
           </div>
-
           {/* グラフセクション */}
           <div className="charts-section">
             <div className="bedlock-generator">

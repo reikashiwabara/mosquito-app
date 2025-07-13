@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { User } from '../types';
 import { useAuth, useLogs } from '../hooks';
 import { createLogMessage, API_BASE_URL } from '../utils';
@@ -34,6 +35,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const navigate = useNavigate();
   const {
     user,
     isLoading,
@@ -114,8 +116,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     register,
     logout: () => {
+      console.log('AuthProvider: ログアウト処理開始');
       logout();
       clearLogs();
+      console.log('AuthProvider: ログアウト処理完了、ナビゲート実行');
+      
+      // React Routerのナビゲートを使用
+      setTimeout(() => {
+        console.log('AuthProvider: navigate(/login)実行');
+        navigate('/login', { replace: true });
+      }, 100);
+      
+      // バックアップとしてwindow.location.replaceも実行
+      setTimeout(() => {
+        console.log('AuthProvider: window.location.replace実行 (バックアップ)');
+        window.location.replace('/login');
+      }, 200);
     },
     handleKill,
     handleDeath,
