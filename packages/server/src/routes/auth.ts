@@ -330,4 +330,59 @@ function authenticateToken(req: any, res: any, next: any) {
   });
 }
 
+// 他のユーザーのプロフィール取得（認証不要）
+router.get('/user/:userId', async (req: express.Request, res: express.Response): Promise<void> => {
+  try {
+    const userId = parseInt(req.params.userId);
+    
+    if (isNaN(userId)) {
+      res.status(400).json({ error: '無効なユーザーIDです' });
+      return;
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        kills: true,
+        deaths: true,
+        title: true,
+        profileImage: true,
+        selectedWeaponId: true,
+        selectedWeapon: {
+          select: {
+            name: true,
+            type: true,
+          },
+        },
+        createdAt: true,
+      },
+    });
+
+    if (!user) {
+      res.status(404).json({ error: 'ユーザーが見つかりません' });
+      return;
+    }
+
+    // キルレート計算
+    const killRate = user.deaths === 0 ? user.kills : user.kills / user.deaths;
+
+    res.json({
+      id: user.id,
+      name: user.name,
+      kills: user.kills,
+      deaths: user.deaths,
+      killRate: killRate,
+      title: user.title,
+      profileImage: user.profileImage,
+      selectedWeapon: user.selectedWeapon?.name || user.selectedWeapon?.type || 'なし',
+      joinedAt: user.createdAt,
+    });
+  } catch (error) {
+    console.error('User profile fetch error:', error);
+    res.status(500).json({ error: 'サーバーエラーが発生しました' });
+  }
+});
+
 export default router;

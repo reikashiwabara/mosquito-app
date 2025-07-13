@@ -1,0 +1,283 @@
+/* ランキングページのスタイル */
+.ranking-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.ranking-container h2 {
+  text-align: center;
+  color: #1e1e2e;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* タブナビゲーション */
+.ranking-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  background: #eff1f5;
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button {
+  flex: 1;
+  max-width: 200px;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: #6c6f85;
+}
+
+.tab-button:hover {
+  background: #d4d8e0;
+  color: #1e1e2e;
+}
+
+.tab-button.active {
+  background: #8839ef;
+  color: white;
+  box-shadow: 0 2px 8px rgba(136, 57, 239, 0.3);
+}
+
+/* ランキングコンテンツ */
+.ranking-content {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.ranking-content h3 {
+  text-align: center;
+  color: #1e1e2e;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* ランキングテーブル */
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.ranking-table thead {
+  background: linear-gradient(135deg, #8839ef 0%, #a855f7 100%);
+}
+
+.ranking-table th {
+  padding: 16px 12px;
+  text-align: center;
+  font-weight: 700;
+  color: white;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.ranking-table td {
+  padding: 14px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e6e9ef;
+  font-size: 0.9rem;
+  color: #4c4f69;
+}
+
+.ranking-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ranking-table tbody tr:hover {
+  background: #f8f9fa;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* 順位に応じたスタイル */
+.ranking-table tr.rank-1 {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #1e1e2e;
+  font-weight: 700;
+}
+
+.ranking-table tr.rank-2 {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e5e5e5 100%);
+  color: #1e1e2e;
+  font-weight: 600;
+}
+
+.ranking-table tr.rank-3 {
+  background: linear-gradient(135deg, #cd7f32 0%, #deb887 100%);
+  color: #1e1e2e;
+  font-weight: 600;
+}
+
+.ranking-table tr.rank-1:hover,
+.ranking-table tr.rank-2:hover,
+.ranking-table tr.rank-3:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* セル別スタイル */
+.rank-cell {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.name-cell {
+  font-weight: 600;
+  color: #1e1e2e;
+}
+
+.user-link {
+  color: #8839ef;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  padding: 2px 6px;
+  display: inline-block;
+}
+
+.user-link:hover {
+  color: #7c2d92;
+  background: rgba(136, 57, 239, 0.1);
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
+.title-cell {
+  font-style: italic;
+  color: #8839ef;
+  font-weight: 500;
+}
+
+.kills-cell {
+  color: #d20f39;
+  font-weight: 600;
+}
+
+.deaths-cell {
+  color: #fe640b;
+  font-weight: 600;
+}
+
+.killrate-cell {
+  color: #40a02b;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.weapon-cell {
+  color: #1e66f5;
+  font-weight: 500;
+}
+
+/* 武器ランキング専用スタイル */
+.weapon-ranking {
+  display: grid;
+  gap: 30px;
+}
+
+.weapon-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 25px;
+  border-left: 5px solid #8839ef;
+}
+
+.weapon-section h3 {
+  text-align: left;
+  margin-bottom: 20px;
+  color: #1e1e2e;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-count {
+  font-size: 1rem;
+  color: #6c6f85;
+  font-weight: 400;
+}
+
+.ranking-table.small {
+  font-size: 0.85rem;
+}
+
+.ranking-table.small th,
+.ranking-table.small td {
+  padding: 10px 8px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .ranking-container {
+    padding: 15px;
+  }
+
+  .ranking-tabs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tab-button {
+    max-width: none;
+  }
+
+  .ranking-table {
+    font-size: 0.8rem;
+  }
+
+  .ranking-table th,
+  .ranking-table td {
+    padding: 8px 6px;
+  }
+
+  .ranking-content {
+    padding: 20px;
+  }
+
+  .weapon-section {
+    padding: 20px;
+  }
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ranking-content {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.ranking-table tbody tr {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.weapon-section {
+  animation: fadeIn 0.4s ease-out;
+}

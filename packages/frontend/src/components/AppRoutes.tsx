@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { LoginScreen, RegisterScreen, MainScreen, MyPage, RankingPage, StatsPage, SettingsPage } from '../pages';
+import { LoginScreen, RegisterScreen, MainScreen, MyPage, RankingPage, StatsPage, SettingsPage, UserProfilePage } from '../pages';
 import { ProtectedRoute } from './ProtectedRoute';
 import { useAuthContext } from './AuthProvider';
 
@@ -125,6 +125,16 @@ export const AppRoutes = () => {
         element={
           <ProtectedRoute user={user}>
             <SettingsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* ユーザープロフィールページ（保護されたルート） */}
+      <Route 
+        path="/user/:userId"
+        element={
+          <ProtectedRoute user={user}>
+            <UserProfilePage />
           </ProtectedRoute>
         }
       />

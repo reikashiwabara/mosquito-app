@@ -32,6 +32,24 @@ export interface UserRanking {
   kills: number;
   deaths: number;
   killRate: number;
+  title?: string;        // 称号
+  selectedWeaponId?: number; // 選択中の武器ID
+  selectedWeapon?: string;   // 選択中の武器名
+}
+
+// 武器ランキング情報
+export interface WeaponRanking {
+  weapon: string;
+  userCount: number;
+  topUsers: UserRanking[];
+}
+
+// 全ランキングデータ
+export interface RankingData {
+  killRate: UserRanking[];
+  kills: UserRanking[];
+  deaths: UserRanking[];
+  weapons: WeaponRanking[];
 }
 
 // ログエントリ

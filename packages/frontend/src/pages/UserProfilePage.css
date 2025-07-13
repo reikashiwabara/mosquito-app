@@ -1,0 +1,349 @@
+/* ユーザープロフィールページのスタイル */
+.user-profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 80vh;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.back-button {
+  background: #8839ef;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-button:hover {
+  background: #7c3aed;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(136, 57, 239, 0.3);
+}
+
+.profile-header h2 {
+  color: #1e1e2e;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.loading-message,
+.error-message {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.loading-message {
+  color: #6c6f85;
+  font-size: 1.2rem;
+}
+
+.error-message {
+  color: #d20f39;
+}
+
+.error-message h3 {
+  color: #1e1e2e;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.error-message p {
+  margin-bottom: 20px;
+  color: #4c4f69;
+}
+
+/* プロフィールカード */
+.profile-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e6e9ef;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #f4f4f5;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #8839ef 0%, #a855f7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(136, 57, 239, 0.3);
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.default-avatar {
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.profile-details {
+  flex: 1;
+}
+
+.username {
+  font-size: 2.5rem;
+  color: #1e1e2e;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.user-title {
+  background: linear-gradient(135deg, #8839ef 0%, #a855f7 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(136, 57, 239, 0.3);
+}
+
+.join-date {
+  color: #6c6f85;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* 統計グリッド */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 12px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #8839ef 0%, #a855f7 100%);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #8839ef;
+}
+
+.stat-card.kills::before {
+  background: linear-gradient(135deg, #d20f39 0%, #e64553 100%);
+}
+
+.stat-card.deaths::before {
+  background: linear-gradient(135deg, #fe640b 0%, #ff8c42 100%);
+}
+
+.stat-card.kd-ratio::before {
+  background: linear-gradient(135deg, #40a02b 0%, #5fb85f 100%);
+}
+
+.stat-card.weapon::before {
+  background: linear-gradient(135deg, #1e66f5 0%, #3584f7 100%);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e1e2e;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  color: #6c6f85;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* 実績セクション */
+.achievement-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 30px;
+  border: 1px solid #e6e9ef;
+}
+
+.achievement-section h3 {
+  color: #1e1e2e;
+  font-size: 1.5rem;
+  margin: 0 0 20px 0;
+  font-weight: 700;
+}
+
+.achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.achievement {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #8839ef;
+  transition: all 0.3s ease;
+}
+
+.achievement:hover {
+  transform: translateX(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.achievement-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.achievement-name {
+  font-weight: 700;
+  color: #1e1e2e;
+  font-size: 1.1rem;
+}
+
+.achievement-desc {
+  color: #6c6f85;
+  font-size: 0.9rem;
+  margin-left: auto;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .user-profile-container {
+    padding: 15px;
+  }
+
+  .profile-card {
+    padding: 25px;
+  }
+
+  .profile-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .username {
+    font-size: 2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .achievement {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .achievement-desc {
+    margin-left: 0;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .profile-header h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* アニメーション */
+@keyframes profileFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-card {
+  animation: profileFadeIn 0.6s ease-out;
+}
+
+.stat-card {
+  animation: profileFadeIn 0.4s ease-out;
+}
+
+.achievement {
+  animation: profileFadeIn 0.5s ease-out;
+}
