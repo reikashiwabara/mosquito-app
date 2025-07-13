@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -24,8 +24,8 @@
 
 .mypage-content {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
   align-items: start;
 }
 
@@ -308,6 +308,17 @@
 }
 
 /* レスポンシブデザイン */
+@media (max-width: 1024px) {
+  .mypage-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .mypage-container {
+    max-width: 900px;
+  }
+}
+
 @media (max-width: 768px) {
   .mypage-content {
     grid-template-columns: 1fr;
@@ -321,5 +332,6 @@
   
   .mypage-container {
     padding: 1rem;
+    max-width: 100%;
   }
 }

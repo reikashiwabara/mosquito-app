@@ -1,7 +1,6 @@
 import type { FC } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import type { LogEntry } from '../types';
-import { ScoreBoard, ActionButtons, LogArea } from '../components';
+import { ScoreBoard, ActionButtons, LogArea, Layout } from '../components';
 
 interface MainScreenProps {
   userName: string;
@@ -22,24 +21,17 @@ export const MainScreen: FC<MainScreenProps> = ({
   onDeath,
   onLogout
 }) => {
-  const navigate = useNavigate();
-
   return (
-    <div className="main-container">
-      <header className="main-header">
-        <h2>{userName}'s Battle</h2>
-        <button className="logout-button" onClick={onLogout}>
-          ログアウト
-        </button>
-      </header>
+    <Layout>
+      <div className="main-container">
+        <header className="main-header">
+          <h2>{userName}'s Battle</h2>
+        </header>
 
-      <ScoreBoard kills={kills} deaths={deaths} />
-      <ActionButtons onKill={onKill} onDeath={onDeath} />
-      <LogArea logs={logs} />
-      <div style={{ marginTop: '16px' }}>
-        <Link to="/mypage" style={{ marginRight: '16px' }}>マイページ</Link>
-        <button onClick={() => navigate('/ranking')}>ランキングを見る</button>
+        <ScoreBoard kills={kills} deaths={deaths} />
+        <ActionButtons onKill={onKill} onDeath={onDeath} />
+        <LogArea logs={logs} />
       </div>
-    </div>
+    </Layout>
   );
 };

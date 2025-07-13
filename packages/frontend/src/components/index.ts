@@ -5,3 +5,5 @@ export { ProtectedRoute } from './ProtectedRoute';
 export { AuthProvider } from './AuthProvider';
 export { AppRoutes } from './AppRoutes';
 export { StatsChart } from './StatsChart';
+export { Sidebar } from './Sidebar';
+export { Layout } from './Layout';

@@ -1,17 +1,15 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import type { User } from '../types';
 import { calculateKDRatio, API_BASE_URL } from '../utils';
-import { StatsChart } from '../components';
+import { StatsChart, Layout } from '../components';
 
 interface MyPageProps {
   user: User;
-  onLogout: () => void;
   onUserUpdate?: (updatedUser: User) => void;
 }
 
-export const MyPage: FC<MyPageProps> = ({ user, onLogout, onUserUpdate }) => {
+export const MyPage: FC<MyPageProps> = ({ user, onUserUpdate }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -116,19 +114,19 @@ export const MyPage: FC<MyPageProps> = ({ user, onLogout, onUserUpdate }) => {
   };
 
   return (
-    <div className="mypage-container">
-      <header className="mypage-header">
-        <h2>マイページ</h2>
-        <Link to="/" className="back-button">戻る</Link>
-      </header>
+    <Layout>
+      <div className="mypage-container">
+        <header className="mypage-header">
+          <h2>マイページ</h2>
+        </header>
 
-      <div className="mypage-content">
-        {/* プロフィールセクション */}
-        <div className="profile-section">
-          {/* 隠れたファイル入力 */}
-          <input
-            ref={fileInputRef}
-            type="file"
+        <div className="mypage-content">
+          {/* プロフィールセクション */}
+          <div className="profile-section">
+            {/* 隠れたファイル入力 */}
+            <input
+              ref={fileInputRef}
+              type="file"
             accept="image/*"
             onChange={handleFileChange}
             style={{ display: 'none' }}
@@ -187,26 +185,21 @@ export const MyPage: FC<MyPageProps> = ({ user, onLogout, onUserUpdate }) => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* グラフセクション */}
-        <div className="charts-section">
-          <div className="bedlock-generator">
-            <h3>bedlockで称号を生成</h3>
-            <button className="bedlock-button" onClick={handleGenerateTitle}>
-              称号を生成
-            </button>
           </div>
 
-          <StatsChart userId={user.id} />
+          {/* グラフセクション */}
+          <div className="charts-section">
+            <div className="bedlock-generator">
+              <h3>bedlockで称号を生成</h3>
+              <button className="bedlock-button" onClick={handleGenerateTitle}>
+                称号を生成
+              </button>
+            </div>
+
+            <StatsChart userId={user.id} />
+          </div>
         </div>
       </div>
-
-      <div className="actions">
-        <button className="logout-button" onClick={onLogout}>
-          ログアウト
-        </button>
-      </div>
-    </div>
+    </Layout>
   );
 };

@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { LoginScreen, RegisterScreen, MainScreen, MyPage, RankingPage } from '../pages';
+import { LoginScreen, RegisterScreen, MainScreen, MyPage, RankingPage, StatsPage, SettingsPage } from '../pages';
 import { ProtectedRoute } from './ProtectedRoute';
 import { useAuthContext } from './AuthProvider';
 
@@ -27,7 +27,7 @@ export const AppRoutes = () => {
         path="/login" 
         element={
           user ? (
-            <Navigate to="/" replace />
+            <Navigate to="/main" replace />
           ) : (
             <LoginScreen 
               onLogin={handleLogin}
@@ -43,7 +43,7 @@ export const AppRoutes = () => {
         path="/register" 
         element={
           user ? (
-            <Navigate to="/" replace />
+            <Navigate to="/main" replace />
           ) : (
             <RegisterScreen
               onRegister={handleRegister}
@@ -56,7 +56,7 @@ export const AppRoutes = () => {
 
       {/* メイン画面（保護されたルート） */}
       <Route 
-        path="/" 
+        path="/main" 
         element={
           <ProtectedRoute user={user}>
             <MainScreen
@@ -72,6 +72,12 @@ export const AppRoutes = () => {
         } 
       />
 
+      {/* ルートパスは /main にリダイレクト */}
+      <Route 
+        path="/" 
+        element={<Navigate to="/main" replace />}
+      />
+
       {/* マイページ（保護されたルート） */}
       <Route 
         path="/mypage" 
@@ -79,7 +85,6 @@ export const AppRoutes = () => {
           <ProtectedRoute user={user}>
             <MyPage
               user={user!}
-              onLogout={logout}
               onUserUpdate={updateUserProfile}
             />
           </ProtectedRoute>
@@ -96,8 +101,28 @@ export const AppRoutes = () => {
         }
       />
 
+      {/* 統計ページ（保護されたルート） */}
+      <Route 
+        path="/stats"
+        element={
+          <ProtectedRoute user={user}>
+            <StatsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* 設定ページ（保護されたルート） */}
+      <Route 
+        path="/settings"
+        element={
+          <ProtectedRoute user={user}>
+            <SettingsPage />
+          </ProtectedRoute>
+        }
+      />
+
       {/* デフォルトルート */}
-      <Route path="*" element={<Navigate to={user ? "/" : "/login"} replace />} />
+      <Route path="*" element={<Navigate to={user ? "/main" : "/login"} replace />} />
     </Routes>
   );
 };
