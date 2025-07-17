@@ -11,25 +11,33 @@ export const useAuth = () => {
 
   // ページ読み込み時にトークンを確認
   useEffect(() => {
+    console.log('useAuth: useEffect実行 - トークン確認開始');
     const savedToken = tokenStorage.get();
+    console.log('useAuth: 保存されたトークン:', savedToken);
     if (savedToken) {
+      console.log('useAuth: トークンが見つかりました、ユーザーデータを取得します');
       setToken(savedToken);
       fetchUserData(savedToken);
+    } else {
+      console.log('useAuth: トークンが見つかりませんでした');
     }
   }, []);
 
   // ユーザー情報を取得
   const fetchUserData = async (authToken: string) => {
+    console.log('fetchUserData: ユーザーデータ取得開始', authToken);
     try {
       const response = await axios.get(`${API_BASE_URL}/auth/user`, {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
       });
+      console.log('fetchUserData: ユーザーデータ取得成功', response.data);
       setUser(response.data);
       return true;
     } catch (error) {
-      console.error('Failed to fetch user data:', error);
+      console.error('fetchUserData: ユーザーデータ取得失敗:', error);
+      console.log('fetchUserData: トークンを削除します');
       tokenStorage.remove();
       setToken(null);
       return false;
@@ -87,9 +95,19 @@ export const useAuth = () => {
 
   // ログアウト処理
   const logout = () => {
+    console.log('ログアウト処理開始');
+    console.log('現在のユーザー:', user);
+    console.log('現在のトークン:', token);
+    console.log('ローカルストレージのトークン（削除前）:', tokenStorage.get());
+    
     setUser(null);
     setToken(null);
     tokenStorage.remove();
+    
+    console.log('ローカルストレージのトークン（削除後）:', tokenStorage.get());
+    console.log('React状態のトークン（setToken後、まだ更新されていない可能性）:', token);
+    
+    console.log('ログアウト処理完了 - ユーザーとトークンをクリア');
   };
 
   // スコア更新API

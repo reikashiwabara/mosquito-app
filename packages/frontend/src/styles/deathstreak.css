@@ -1,0 +1,568 @@
+/* デスストリークエフェクトのスタイル */
+
+.deathstreak-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.deathstreak-overlay.enter {
+  animation: deathEnter 0.8s ease-out forwards;
+}
+
+.deathstreak-overlay.display {
+  animation: deathSorrow 2s ease-in-out infinite;
+}
+
+.deathstreak-overlay.exit {
+  animation: deathExit 1.2s ease-in forwards;
+}
+
+/* 悲しい背景エフェクト */
+.deathstreak-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 27, 0.4) 0%,
+    rgba(30, 30, 46, 0.6) 30%,
+    rgba(49, 50, 68, 0.8) 60%,
+    rgba(88, 91, 112, 0.9) 100%
+  );
+}
+
+/* 雨エフェクト */
+.rain-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rain-drop {
+  position: absolute;
+  top: -10px;
+  left: var(--position, 50%);
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(186, 194, 222, 0.6) 20%,
+    rgba(186, 194, 222, 0.8) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  animation: rainFall var(--duration, 3s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* 暗い雲エフェクト */
+.dark-clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+}
+
+.cloud {
+  position: absolute;
+  top: 10%;
+  left: var(--cloud-x, 20%);
+  width: 100px;
+  height: 40px;
+  background: rgba(88, 91, 112, 0.7);
+  border-radius: 50px;
+  transform: scale(var(--cloud-size, 1));
+  animation: cloudDrift 10s ease-in-out infinite;
+  animation-delay: var(--cloud-delay, 0s);
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(88, 91, 112, 0.7);
+  border-radius: 50px;
+}
+
+.cloud::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 10px;
+}
+
+.cloud::after {
+  width: 60px;
+  height: 20px;
+  top: -10px;
+  right: 15px;
+}
+
+/* メインテキスト */
+.deathstreak-text {
+  position: relative;
+  text-align: center;
+  color: var(--streak-color, #585b70);
+  text-shadow: 
+    0 0 5px rgba(88, 91, 112, 0.5),
+    2px 2px 8px rgba(0, 0, 0, 0.8),
+    0 0 15px rgba(88, 91, 112, 0.3);
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: 900;
+  text-transform: lowercase;
+  letter-spacing: 2px;
+  filter: blur(0.5px);
+}
+
+.deathstreak-text.small {
+  font-size: 1.8rem;
+}
+
+.deathstreak-text.medium {
+  font-size: 2.5rem;
+}
+
+.deathstreak-text.large {
+  font-size: 3.5rem;
+}
+
+.deathstreak-text.huge {
+  font-size: 4.5rem;
+  animation: textDespair 3s ease-out infinite;
+}
+
+.streak-count {
+  font-size: 1.5em;
+  margin-bottom: 0.3em;
+  animation: countSink 1s ease-out;
+  color: #f38ba8;
+}
+
+.streak-message {
+  font-size: 1em;
+  margin-bottom: 0.2em;
+  animation: messageTremble 2s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+.streak-subtitle {
+  font-size: 0.4em;
+  opacity: 0.7;
+  letter-spacing: 3px;
+  animation: subtitleFadeOut 2s ease-in-out infinite;
+  color: #7f849c;
+}
+
+/* 涙エフェクト */
+.sadness-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tears-effect {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  height: 60%;
+}
+
+.tear {
+  position: absolute;
+  top: 0;
+  left: var(--tear-x, 50%);
+  width: 4px;
+  height: 15px;
+  background: linear-gradient(
+    to bottom,
+    rgba(186, 194, 222, 0.8) 0%,
+    rgba(186, 194, 222, 0.4) 100%
+  );
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: tearDrop 3s ease-out infinite;
+  animation-delay: var(--tear-delay, 0s);
+}
+
+/* 絶望エフェクト */
+.despair-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.screen-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fade-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    transparent 30%,
+    rgba(17, 17, 27, 0.3) 60%,
+    rgba(17, 17, 27, 0.7) 100%
+  );
+  animation: despairFade 4s ease-in-out infinite;
+}
+
+.despair-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.despair-particle {
+  position: absolute;
+  top: var(--particle-y, 50%);
+  left: var(--particle-x, 50%);
+  width: 3px;
+  height: 3px;
+  background-color: #45475a;
+  border-radius: 50%;
+  animation: despairFloat 4s ease-out infinite;
+  animation-delay: var(--particle-delay, 0s);
+  opacity: 0;
+}
+
+/* 悲しい音符エフェクト */
+.musical-notes {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  width: 100%;
+  height: 20%;
+}
+
+.sad-note {
+  position: absolute;
+  top: 0;
+  left: var(--note-x, 50%);
+  font-size: 2rem;
+  color: rgba(127, 132, 156, 0.6);
+  animation: noteFloat 4s ease-in-out infinite;
+  animation-delay: var(--note-delay, 0s);
+  font-family: serif;
+}
+
+/* アニメーション定義 */
+@keyframes deathEnter {
+  0% {
+    opacity: 0;
+    transform: scale(1.2) rotateX(30deg);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.9) rotateX(0deg);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+    filter: blur(0.5px);
+  }
+}
+
+@keyframes deathSorrow {
+  0%, 100% {
+    transform: scale(1) rotateZ(0deg);
+  }
+  25% {
+    transform: scale(0.98) rotateZ(-0.5deg);
+  }
+  50% {
+    transform: scale(0.96) rotateZ(0deg);
+  }
+  75% {
+    transform: scale(0.98) rotateZ(0.5deg);
+  }
+}
+
+@keyframes deathExit {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7) translateY(50px);
+    filter: blur(15px);
+  }
+}
+
+@keyframes rainFall {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes cloudDrift {
+  0%, 100% {
+    transform: translateX(0) scale(var(--cloud-size, 1));
+  }
+  50% {
+    transform: translateX(-20px) scale(calc(var(--cloud-size, 1) * 1.1));
+  }
+}
+
+@keyframes countSink {
+  0% {
+    transform: scale(1.5) translateY(-30px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) translateY(10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes messageTremble {
+  0%, 100% {
+    transform: translateX(0) rotateZ(0deg);
+  }
+  10% {
+    transform: translateX(-1px) rotateZ(-0.3deg);
+  }
+  20% {
+    transform: translateX(1px) rotateZ(0.3deg);
+  }
+  30% {
+    transform: translateX(-0.5px) rotateZ(-0.2deg);
+  }
+  40% {
+    transform: translateX(0.5px) rotateZ(0.2deg);
+  }
+  50% {
+    transform: translateX(0) rotateZ(0deg);
+  }
+}
+
+@keyframes subtitleFadeOut {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes textDespair {
+  0%, 100% {
+    transform: scale(1);
+    filter: blur(0.5px) saturate(0.8);
+  }
+  25% {
+    transform: scale(0.95);
+    filter: blur(1px) saturate(0.6);
+  }
+  50% {
+    transform: scale(0.98);
+    filter: blur(0.8px) saturate(0.5);
+  }
+  75% {
+    transform: scale(0.96);
+    filter: blur(1.2px) saturate(0.4);
+  }
+}
+
+@keyframes tearDrop {
+  0% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(200px) scaleY(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes despairFade {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes despairFloat {
+  0% {
+    transform: translateY(0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(-20px) scale(1);
+    opacity: 0.6;
+  }
+  80% {
+    transform: translateY(-60px) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes noteFloat {
+  0% {
+    transform: translateY(0) rotateZ(0deg);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(-30px) rotateZ(-5deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-40px) rotateZ(0deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-50px) rotateZ(5deg);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-60px) rotateZ(0deg);
+    opacity: 0;
+  }
+}
+
+/* 気分別のスタイル */
+.deathstreak-overlay.disappointed {
+  filter: saturate(0.7);
+}
+
+.deathstreak-overlay.sad {
+  filter: saturate(0.5) brightness(0.9);
+}
+
+.deathstreak-overlay.frustrated {
+  filter: saturate(0.6) contrast(1.1);
+}
+
+.deathstreak-overlay.helpless {
+  filter: saturate(0.4) brightness(0.8);
+}
+
+.deathstreak-overlay.painful {
+  filter: saturate(0.3) brightness(0.7) blur(0.5px);
+}
+
+.deathstreak-overlay.hopeless {
+  filter: saturate(0.2) brightness(0.6) blur(1px);
+}
+
+.deathstreak-overlay.despair {
+  filter: saturate(0.1) brightness(0.5) blur(1.5px) contrast(0.8);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .deathstreak-text.small {
+    font-size: 1.4rem;
+  }
+  
+  .deathstreak-text.medium {
+    font-size: 1.8rem;
+  }
+  
+  .deathstreak-text.large {
+    font-size: 2.2rem;
+  }
+  
+  .deathstreak-text.huge {
+    font-size: 2.8rem;
+  }
+  
+  .rain-drop {
+    width: 1.5px;
+    height: 15px;
+  }
+  
+  .tear {
+    width: 3px;
+    height: 12px;
+  }
+  
+  .sad-note {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .deathstreak-text {
+    letter-spacing: 1px;
+  }
+  
+  .deathstreak-text.small {
+    font-size: 1.2rem;
+  }
+  
+  .deathstreak-text.medium {
+    font-size: 1.4rem;
+  }
+  
+  .deathstreak-text.large {
+    font-size: 1.8rem;
+  }
+  
+  .deathstreak-text.huge {
+    font-size: 2.2rem;
+  }
+  
+  .cloud {
+    width: 60px;
+    height: 25px;
+  }
+}

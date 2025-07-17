@@ -1,0 +1,389 @@
+/* キルストリークエフェクトのスタイル */
+
+.killstreak-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.killstreak-overlay.enter {
+  animation: streakEnter 0.5s ease-out forwards;
+}
+
+.killstreak-overlay.display {
+  animation: streakPulse 1.5s ease-in-out infinite;
+}
+
+.killstreak-overlay.exit {
+  animation: streakExit 1s ease-in forwards;
+}
+
+/* 背景エフェクト */
+.killstreak-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.streak-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+}
+
+.particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: var(--streak-color, #fff);
+  border-radius: 50%;
+  transform-origin: 0 0;
+  animation: particleExplode 2s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+  transform: translate(-50%, -50%) rotate(var(--angle, 0deg)) translateY(0);
+}
+
+/* メインテキスト */
+.killstreak-text {
+  position: relative;
+  text-align: center;
+  color: var(--streak-color, #fff);
+  text-shadow: 
+    0 0 10px var(--streak-color, #fff),
+    0 0 20px var(--streak-color, #fff),
+    0 0 30px var(--streak-color, #fff),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.killstreak-text.small {
+  font-size: 2rem;
+}
+
+.killstreak-text.medium {
+  font-size: 3rem;
+}
+
+.killstreak-text.large {
+  font-size: 4rem;
+}
+
+.killstreak-text.huge {
+  font-size: 5rem;
+  animation: textGigantic 2s ease-out infinite;
+}
+
+.streak-count {
+  font-size: 1.5em;
+  margin-bottom: 0.2em;
+  animation: countBounce 0.6s ease-out;
+}
+
+.streak-message {
+  font-size: 1em;
+  margin-bottom: 0.1em;
+  animation: messageSway 1s ease-in-out infinite;
+}
+
+.streak-subtitle {
+  font-size: 0.4em;
+  opacity: 0.8;
+  letter-spacing: 2px;
+  animation: subtitleFade 1.5s ease-in-out infinite;
+}
+
+/* エピックエフェクト（高ストリーク時） */
+.epic-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.lightning-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.lightning-bolt {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #fff 20%,
+    #74c0fc 40%,
+    #fff 60%,
+    transparent 100%
+  );
+  transform: translateX(-50%) skewX(-20deg);
+  animation: lightningStrike 0.3s ease-out;
+  animation-delay: var(--bolt-delay, 0s);
+  opacity: 0;
+}
+
+.lightning-bolt:nth-child(even) {
+  left: 30%;
+  transform: translateX(-50%) skewX(15deg);
+}
+
+.lightning-bolt:nth-child(3n) {
+  left: 70%;
+  transform: translateX(-50%) skewX(-10deg);
+}
+
+/* 画面揺れエフェクト */
+.screen-shake {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.shake-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  animation: screenShake 0.5s ease-in-out infinite;
+}
+
+/* アニメーション定義 */
+@keyframes streakEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotateY(180deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotateY(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+@keyframes streakPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes streakExit {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotateX(90deg);
+  }
+}
+
+@keyframes particleExplode {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--angle, 0deg)) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--angle, 0deg)) translateY(-150px);
+    opacity: 0;
+  }
+}
+
+@keyframes countBounce {
+  0% {
+    transform: scale(0.5) translateY(20px);
+  }
+  50% {
+    transform: scale(1.2) translateY(-10px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes messageSway {
+  0%, 100% {
+    transform: translateX(0) rotateZ(0deg);
+  }
+  25% {
+    transform: translateX(-2px) rotateZ(-1deg);
+  }
+  75% {
+    transform: translateX(2px) rotateZ(1deg);
+  }
+}
+
+@keyframes subtitleFade {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes textGigantic {
+  0%, 100% {
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1);
+    filter: hue-rotate(45deg);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: hue-rotate(90deg);
+  }
+  75% {
+    transform: scale(1.08);
+    filter: hue-rotate(135deg);
+  }
+}
+
+@keyframes lightningStrike {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) skewX(-20deg) scaleY(0);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) skewX(-20deg) scaleY(1);
+  }
+  20% {
+    opacity: 0;
+    transform: translateX(-50%) skewX(-20deg) scaleY(1);
+  }
+  30% {
+    opacity: 1;
+    transform: translateX(-50%) skewX(-20deg) scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) skewX(-20deg) scaleY(1);
+  }
+}
+
+@keyframes screenShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-2px);
+  }
+  20% {
+    transform: translateX(2px);
+  }
+  30% {
+    transform: translateX(-1px);
+  }
+  40% {
+    transform: translateX(1px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(2px);
+  }
+  70% {
+    transform: translateX(-1px);
+  }
+  80% {
+    transform: translateX(1px);
+  }
+  90% {
+    transform: translateX(-1px);
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .killstreak-text.small {
+    font-size: 1.5rem;
+  }
+  
+  .killstreak-text.medium {
+    font-size: 2rem;
+  }
+  
+  .killstreak-text.large {
+    font-size: 2.5rem;
+  }
+  
+  .killstreak-text.huge {
+    font-size: 3rem;
+  }
+  
+  .particle {
+    width: 3px;
+    height: 3px;
+  }
+  
+  .streak-particles {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .killstreak-text {
+    letter-spacing: 1px;
+  }
+  
+  .killstreak-text.small {
+    font-size: 1.2rem;
+  }
+  
+  .killstreak-text.medium {
+    font-size: 1.5rem;
+  }
+  
+  .killstreak-text.large {
+    font-size: 2rem;
+  }
+  
+  .killstreak-text.huge {
+    font-size: 2.5rem;
+  }
+}

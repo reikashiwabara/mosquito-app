@@ -7,9 +7,20 @@ export const API_BASE_URL = import.meta.env.PROD
 
 // ローカルストレージ関連のユーティリティ
 export const tokenStorage = {
-  get: (): string | null => localStorage.getItem('token'),
-  set: (token: string): void => localStorage.setItem('token', token),
-  remove: (): void => localStorage.removeItem('token'),
+  get: (): string | null => {
+    const token = localStorage.getItem('token');
+    console.log('tokenStorage.get() called, result:', token);
+    return token;
+  },
+  set: (token: string): void => {
+    console.log('tokenStorage.set() called with:', token);
+    localStorage.setItem('token', token);
+  },
+  remove: (): void => {
+    console.log('tokenStorage.remove() called');
+    localStorage.removeItem('token');
+    console.log('tokenStorage.remove() completed, checking result:', localStorage.getItem('token'));
+  },
 };
 
 // K/D比計算

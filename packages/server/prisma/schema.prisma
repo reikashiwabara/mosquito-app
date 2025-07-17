@@ -16,14 +16,32 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String   // ユーザー名
-  password  String   // パスワードのハッシュを保存
-  kills     Int      @default(0) // キル数
-  deaths    Int      @default(0) // デス数
-  posts     Post[]
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  name        String   // ユーザー名
+  password    String   // パスワードのハッシュを保存
+  kills       Int      @default(0) // キル数
+  deaths      Int      @default(0) // デス数
+  profileImage String? // プロフィール画像のURL（オプショナル）
+  title       String?  // 称号（オプショナル）
+  selectedWeaponId Int? // 選択中の武器ID
+  selectedWeapon Weapon? @relation(fields: [selectedWeaponId], references: [id])
+  posts       Post[]
+  gameLogs    GameLog[] // ゲームログとの関連
+  createdAt   DateTime @default(now())
+}
+
+model Weapon {
+  id          Int      @id @default(autoincrement())
+  type        String   // "hand", "weapon", "spray", "electric_grid"
+  name        String   // 武器の名前
+  description String?  // 武器の説明
+  icon        String?  // アイコンの絵文字またはURL
+  damage      Int      @default(1) // ダメージ値
+  isUnlocked  Boolean  @default(true) // 解放されているか
+  users       User[]   // この武器を選択しているユーザー
+  gameLogs    GameLog[] // この武器を使用したゲームログ
+  createdAt   DateTime @default(now())
 }
 
 model Post {
@@ -34,4 +52,17 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
   createdAt DateTime @default(now())
+}
+
+model GameLog {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  action    String   // "kill" または "death"
+  weaponId  Int?     // 使用した武器ID（オプショナル）
+  weaponRef Weapon?  @relation(fields: [weaponId], references: [id])
+  weapon    String?  // 武器名（シンプルな文字列として保存）
+  createdAt DateTime @default(now())
+  
+  @@index([userId, createdAt]) // クエリ最適化のためのインデックス
 }

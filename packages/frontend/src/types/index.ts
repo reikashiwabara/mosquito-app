@@ -3,6 +3,16 @@
 // 画面の状態（React Router導入により廃止予定）
 export type Screen = 'login' | 'register' | 'main' | 'mypage';
 
+// 武器情報
+export interface Weapon {
+  id: number;
+  type: string;
+  name: string;
+  emoji: string;
+  icon?: string; // 武器画像のパス
+  damage: number;
+}
+
 // ユーザー情報
 export interface User {
   id: number;
@@ -10,6 +20,18 @@ export interface User {
   name: string;
   kills: number;
   deaths: number;
+  profileImage?: string; // プロフィール画像のURL（オプショナル）
+  title?: string;        // 称号（オプショナル）
+  selectedWeaponId?: number; // 選択中の武器ID（オプショナル）
+}
+
+// ランキング用ユーザー情報
+export interface UserRanking {
+  id: number;
+  name: string;
+  kills: number;
+  deaths: number;
+  killRate: number;
 }
 
 // ログエントリ

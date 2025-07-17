@@ -55,7 +55,10 @@ router.post('/register', async (req: any, res: any) => {
         email: user.email,
         name: user.name,
         kills: user.kills,
-        deaths: user.deaths
+        deaths: user.deaths,
+        profileImage: user.profileImage,
+        title: user.title,
+        selectedWeaponId: user.selectedWeaponId
       }
     });
   } catch (error) {
@@ -105,7 +108,10 @@ router.post('/login', async (req: any, res: any) => {
         email: user.email,
         name: user.name,
         kills: user.kills,
-        deaths: user.deaths
+        deaths: user.deaths,
+        profileImage: user.profileImage,
+        title: user.title,
+        selectedWeaponId: user.selectedWeaponId
       }
     });
   } catch (error) {
@@ -125,6 +131,9 @@ router.get('/user', authenticateToken, async (req: any, res: any) => {
         name: true,
         kills: true,
         deaths: true,
+        profileImage: true,
+        title: true,
+        selectedWeaponId: true,
         createdAt: true
       }
     });
@@ -166,6 +175,139 @@ router.put('/score', authenticateToken, async (req: any, res: any) => {
     });
   } catch (error) {
     console.error('Update score error:', error);
+    res.status(500).json({ error: 'サーバーエラーが発生しました' });
+  }
+});
+
+// プロフィール更新
+router.put('/profile', authenticateToken, async (req: any, res: any) => {
+  try {
+    const { profileImage, title } = req.body;
+
+    const updatedUser = await prisma.user.update({
+      where: { id: req.user.userId },
+      data: {
+        ...(profileImage !== undefined && { profileImage }),
+        ...(title !== undefined && { title })
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        kills: true,
+        deaths: true,
+        profileImage: true,
+        title: true,
+        selectedWeaponId: true
+      }
+    });
+
+    res.json({
+      message: 'プロフィールが更新されました',
+      user: updatedUser
+    });
+  } catch (error) {
+    console.error('Profile update error:', error);
+    res.status(500).json({ error: 'サーバーエラーが発生しました' });
+  }
+});
+
+// 称号生成（bedlock機能）
+router.post('/generate-title', authenticateToken, async (req: any, res: any) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.userId }
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'ユーザーが見つかりません' });
+    }
+
+    // 簡単な称号生成ロジック（K/D比に基づく）
+    const kdRatio = user.deaths > 0 ? user.kills / user.deaths : user.kills;
+    let generatedTitle = '';
+
+    if (kdRatio >= 5) {
+      generatedTitle = '蚊殺しの達人';
+    } else if (kdRatio >= 3) {
+      generatedTitle = '蚊退治のエキスパート';
+    } else if (kdRatio >= 2) {
+      generatedTitle = '蚊ハンター';
+    } else if (kdRatio >= 1) {
+      generatedTitle = '蚊との戦士';
+    } else if (user.deaths > user.kills) {
+      generatedTitle = '蚊の餌食';
+    } else {
+      generatedTitle = '蚊との初心者';
+    }
+
+    // 称号をユーザーに設定
+    const updatedUser = await prisma.user.update({
+      where: { id: req.user.userId },
+      data: { title: generatedTitle },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        kills: true,
+        deaths: true,
+        profileImage: true,
+        title: true,
+        selectedWeaponId: true
+      }
+    });
+
+    res.json({
+      message: '称号が生成されました',
+      title: generatedTitle,
+      user: updatedUser
+    });
+  } catch (error) {
+    console.error('Title generation error:', error);
+    res.status(500).json({ error: 'サーバーエラーが発生しました' });
+  }
+});
+
+// 武器選択
+router.put('/select-weapon', authenticateToken, async (req: any, res: any) => {
+  try {
+    const { weaponId } = req.body;
+    
+    if (!weaponId) {
+      return res.status(400).json({ error: '武器IDが必要です' });
+    }
+
+    // 武器が存在するかチェック
+    const weapon = await prisma.weapon.findUnique({
+      where: { id: weaponId }
+    });
+
+    if (!weapon) {
+      return res.status(400).json({ error: '指定された武器が見つかりません' });
+    }
+
+    // ユーザーの選択武器を更新
+    const updatedUser = await prisma.user.update({
+      where: { id: req.user.userId },
+      data: { selectedWeaponId: weaponId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        kills: true,
+        deaths: true,
+        profileImage: true,
+        title: true,
+        selectedWeaponId: true
+      }
+    });
+
+    res.json({
+      message: '武器が選択されました',
+      user: updatedUser
+    });
+  } catch (error) {
+    console.error('Weapon selection error:', error);
     res.status(500).json({ error: 'サーバーエラーが発生しました' });
   }
 });

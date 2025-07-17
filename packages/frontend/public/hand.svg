@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 手のアイコン -->
+  <rect width="64" height="64" fill="#1e1e2e"/>
+  <!-- 手のひら -->
+  <ellipse cx="32" cy="40" rx="12" ry="16" fill="#fab387"/>
+  <!-- 指 -->
+  <rect x="28" y="16" width="3" height="20" fill="#fab387" rx="1.5"/>
+  <rect x="32" y="12" width="3" height="24" fill="#fab387" rx="1.5"/>
+  <rect x="36" y="14" width="3" height="22" fill="#fab387" rx="1.5"/>
+  <rect x="40" y="18" width="3" height="18" fill="#fab387" rx="1.5"/>
+  <!-- 親指 -->
+  <ellipse cx="22" cy="36" rx="4" ry="8" fill="#fab387"/>
+  <!-- 影 -->
+  <ellipse cx="33" cy="42" rx="8" ry="12" fill="#f38ba8" opacity="0.3"/>
+</svg>
